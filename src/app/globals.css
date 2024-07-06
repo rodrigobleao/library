@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.stroke-thin {
+  stroke-width: 0.7;
+}
+.stroke-medium {
+  stroke-width: 1.6;
+}
