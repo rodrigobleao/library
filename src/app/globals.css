@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  overflow-y: scroll;
+}
+
 .stroke-thin {
   stroke-width: 0.7;
 }

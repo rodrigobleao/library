@@ -1,7 +1,7 @@
 import { LuGrid, LuPackagePlus, LuPieChart } from 'react-icons/lu';
 import { TbDeviceAnalytics, TbLink } from 'react-icons/tb';
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
-import { IoMdClose } from 'react-icons/io';
+import { IoMdArrowBack, IoMdClose } from 'react-icons/io';
 import { FiSearch } from 'react-icons/fi';
 import { IconType } from 'react-icons';
 import { CiClock2 } from 'react-icons/ci';
@@ -15,7 +15,7 @@ interface IconConfig {
 }
 
 export type IconName =
-  | 'boxAdd'
+  | 'box-add'
   | 'link'
   | 'bookmark'
   | 'bookmark-fill'
@@ -25,10 +25,11 @@ export type IconName =
   | 'search'
   | 'unlock'
   | 'clock'
-  | 'create';
+  | 'create'
+  | 'arrow-back';
 
 const iconsMap: Record<IconName, IconConfig> = {
-  boxAdd: { icon: LuPackagePlus, style: 'stroke-medium' },
+  'box-add': { icon: LuPackagePlus, style: 'stroke-medium' },
   link: { icon: TbLink },
   bookmark: { icon: BsBookmark },
   'bookmark-fill': { icon: BsBookmarkFill },
@@ -39,6 +40,7 @@ const iconsMap: Record<IconName, IconConfig> = {
   unlock: { icon: BiLockOpen },
   clock: { icon: CiClock2 },
   create: { icon: TbDeviceAnalytics },
+  'arrow-back': { icon: IoMdArrowBack },
 };
 
 export default iconsMap;

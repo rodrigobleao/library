@@ -43,7 +43,7 @@ const Typography: React.FC<TypographyProps> = ({
 
     case 'strong':
       return (
-        <strong className={`text-lg font-semibold ${colorClass}  ${className}`}>
+        <strong className={`text-lg font-semibold ${colorClass} ${className}`}>
           {children}
         </strong>
       );

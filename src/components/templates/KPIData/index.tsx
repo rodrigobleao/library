@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
-import ModalBase from '../../organisms/ModalBase';
 import ModalTitle from '../../molecules/ModalTitle';
 import Icon from '../../atoms/Icon';
-import EdgeContainer from '../../molecules/EdgeContainer';
-import IconButton from '../../atoms/IconButton';
 import BackgroundContainer from '../../molecules/BackgroundContainer';
 import Button from '../../atoms/Button';
 import Typography from '../../atoms/Typography';
 import TagsList from '../../molecules/TagsList';
 import ItemsCardList from '../../organisms/ItemsCardList';
-import { KPIProps } from '@/mock/kpis';
-import AttachToLayoutModal from '../AttachToLayoutModal';
-import RequestAccessModal from '../RequestAccessModal';
+import useFavoriteItemStore from '@/stores/favoriteItemsStore';
+import { Kpi } from '@/mock/data';
 
 const questions = [
   {
@@ -42,57 +38,22 @@ const questions = [
 
 const labels = ['comms', 'coverage', 'stakeholders'];
 
-type KPIModalProps = {
-  item?: KPIProps;
-  isOpen: boolean;
-  setIsOpen: () => void;
+type KPIDataProps = {
+  item?: Kpi;
 };
 
-const KPIModal: React.FC<KPIModalProps> = ({ item, isOpen, setIsOpen }) => {
+const KPIData: React.FC<KPIDataProps> = ({ item }) => {
   const [activeItem, setActiveItem] = useState<string>();
-  const [isActionModalOpen, setIsActionModalOpen] = useState(false);
-
-  const handleToggleActionModal = () => {
-    setIsActionModalOpen((prev) => !prev);
-  };
+  const { favorites, toggleFavorite } = useFavoriteItemStore();
 
   if (!item) return null;
 
+  const isFavorite = favorites.includes(item.id);
+
   return (
-    <ModalBase isOpen={isOpen} setIsOpen={setIsOpen}>
-      {item.access ? (
-        <AttachToLayoutModal
-          isOpen={isActionModalOpen}
-          setIsOpen={handleToggleActionModal}
-          item={item}
-          className="z-100 mr-4"
-        />
-      ) : (
-        <RequestAccessModal
-          isOpen={isActionModalOpen}
-          setIsOpen={handleToggleActionModal}
-          item={item}
-          className="z-100 mr-4"
-        />
-      )}
-      {!item.access && (
-        <div className="absolute inset-0 bg-black opacity-50 rounded-lg" />
-      )}
-      <EdgeContainer>
-        <div
-          className={`flex gap-1 rounded-lg ${!item.access && 'bg-accent p-1'}`}
-        >
-          <IconButton
-            name={item.access ? 'create' : 'unlock'}
-            color="black"
-            onClick={handleToggleActionModal}
-          />
-          <IconButton name="link" color="black" />
-          <IconButton name="close" color="black" onClick={setIsOpen} />
-        </div>
-      </EdgeContainer>
+    <div>
       <ModalTitle
-        title="INTES"
+        title={item.title}
         titleLabel="Layout"
         TitleDescription="Descriptive name of the Layout"
       >
@@ -109,24 +70,28 @@ const KPIModal: React.FC<KPIModalProps> = ({ item, isOpen, setIsOpen }) => {
       <BackgroundContainer className="my-8">
         <div className="flex flex-1 w-full h-80"></div>
       </BackgroundContainer>
-      <Typography variant="strong" className="text-3xl">
+      <Typography variant="strong" className="text-2xl">
         Business Questions
       </Typography>
       <ItemsCardList
         items={questions}
         activeItem={activeItem}
-        setActiveItem={setActiveItem}
+        itemAction={setActiveItem}
         activeItemBackground="accent"
       />
       <Button
-        title="Favorite Item"
+        title={`${isFavorite ? 'Remove from favorites' : 'Favorite Item'}`}
         variant="modal"
-        className="w-full mt-6 relative"
+        className="w-full mt-6 relative z-50"
+        onClick={() => toggleFavorite(item.id)}
       >
-        <Icon name="bookmark" className="text-white" />
+        <Icon
+          name={isFavorite ? 'bookmark-fill' : 'bookmark'}
+          className="text-white"
+        />
       </Button>
-    </ModalBase>
+    </div>
   );
 };
 
-export default KPIModal;
+export default KPIData;

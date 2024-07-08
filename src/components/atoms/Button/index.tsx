@@ -21,7 +21,9 @@ const Button: React.FC<CustomButtonProps> = ({
     <button
       {...props}
       className={`flex flex-row gap-2 items-center justify-center px-4 py-2
-        rounded-md hover:opacity-95 active:opacity-90 select-none ${buttonStyle} ${className}`}
+                  rounded-md hover:opacity-95 active:opacity-90 select-none
+                  disabled:opacity-80 disabled:cursor-not-allowed
+                  ${buttonStyle} ${className}`}
     >
       {children && children}
       {title && (

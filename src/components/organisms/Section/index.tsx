@@ -2,12 +2,12 @@ import React from 'react';
 import Typography from '../../atoms/Typography';
 import { ItemCardBackgroundColorOptions } from '../../molecules/ItemCard/styles';
 import ItemsCardList from '../ItemsCardList';
-import { KPIProps } from '@/mock/kpis';
+import { Asset } from '@/mock/data';
 
 interface SectionProps {
   title?: string;
   subtitle?: string;
-  items: KPIProps[];
+  items: Asset[];
   className?: string;
   activeItem?: string;
   setActiveItem?: (index: string) => void;
@@ -22,7 +22,6 @@ const Section: React.FC<SectionProps> = ({
   items,
   className,
   activeItem,
-  setActiveItem,
   background,
   activeItemBackground,
   itemAction,
@@ -36,7 +35,6 @@ const Section: React.FC<SectionProps> = ({
       <ItemsCardList
         items={items}
         activeItem={activeItem}
-        setActiveItem={setActiveItem}
         background={background}
         activeItemBackground={activeItemBackground}
         itemAction={itemAction}

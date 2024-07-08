@@ -7,7 +7,6 @@ interface SectionProps {
   items: KPIProps[];
   className?: string;
   activeItem?: string;
-  setActiveItem?: (index: string) => void;
   background?: ItemCardBackgroundColorOptions;
   activeItemBackground?: ItemCardBackgroundColorOptions;
   itemAction?: (id: string) => void;
@@ -17,14 +16,12 @@ const ItemsCardList: React.FC<SectionProps> = ({
   items,
   className,
   activeItem,
-  setActiveItem,
   background,
   activeItemBackground,
   itemAction,
 }) => {
   const handleClickItem = (index: number) => {
     itemAction && itemAction(items[index].id);
-    setActiveItem && setActiveItem(items[index].id);
   };
   return (
     <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 mt-7 ${className}`}>
